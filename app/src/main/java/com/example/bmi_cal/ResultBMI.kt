@@ -24,7 +24,7 @@ class ResultBMI : AppCompatActivity() {
 
         binding.resultBmi.setText("Your BMI : "+String.format("%.2f", bmi))
         binding.resultWeight.setText("Your Weight : " +weight)
-        binding.resultHeight.setText("Your Height : " +height)
+        binding.resultHeight.setText("Your Height : $height")
 
         if (bmi <= 18.5) {
             binding.aboutBmi.setText("You are under weight")
@@ -39,36 +39,5 @@ class ResultBMI : AppCompatActivity() {
             binding.aboutBmi.setText("You are Obesity ")
         }
 
-    }
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu,menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item:MenuItem): Boolean {
-        when (item.itemId){
-            R.id.item_1 ->
-            {
-                var intent = Intent(this,AboutBMI::class.java)
-                startActivity(intent)
-            }
-            R.id.item_2 ->
-            {
-                var intent = Intent(this, BMIChart::class.java)
-                startActivity(intent)
-
-            }
-
-            R.id.item_3-> {
-                var intent = Intent(this, AboutDeveloper::class.java)
-                startActivity(intent)
-            }
-
-            R.id.item_4-> {
-                finish()
-                exitProcess(0)
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 }
