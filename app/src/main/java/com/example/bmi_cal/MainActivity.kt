@@ -79,6 +79,11 @@ class MainActivity : AppCompatActivity() {
 
             }
             R.id.item_4-> {
+                var intent = Intent(this, ContactUs::class.java)
+                startActivity(intent)
+            }
+
+            R.id.item_5-> {
                 finish()
                 exitProcess(0)
             }
