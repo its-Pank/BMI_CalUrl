@@ -55,13 +55,11 @@ class ContactUs : AppCompatActivity(), View.OnClickListener {
                 }
             }
         }
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
+    override fun onRequestPermissionsResult(requestCode: Int,permissions: Array<out String>,grantResults: IntArray)
+    {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 1001) {
+        if (requestCode == 1001)
+        {
             if (grantResults.isNotEmpty() && permissions[0].equals(PackageManager.PERMISSION_GRANTED))
             {
                 if (ContextCompat.checkSelfPermission(this,android.Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED)
@@ -76,6 +74,8 @@ class ContactUs : AppCompatActivity(), View.OnClickListener {
             }
         }
     }
+
+
 }
 
 
