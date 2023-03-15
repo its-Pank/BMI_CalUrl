@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(applicationContext,"clicked No",Toast.LENGTH_SHORT).show()
         }
         builder.setNeutralButton("Cancel"){dialogInterface , which ->
-            Toast.makeText(applicationContext,"clicked cancel\n operation cancel",Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext,"operation cancel",Toast.LENGTH_SHORT).show()
         }
 
         val alertDialog: AlertDialog = builder.create()
