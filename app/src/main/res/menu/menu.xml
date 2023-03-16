@@ -21,11 +21,11 @@
 
     </item>
 
-
     <item android:id="@+id/item_5"
-        android:title="Exit">
+        android:title="Web View BMI">
 
     </item>
+
 
 
 </menu>

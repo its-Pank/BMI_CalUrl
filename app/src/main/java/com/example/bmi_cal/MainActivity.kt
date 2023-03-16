@@ -83,8 +83,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             R.id.item_5-> {
-                finish()
-                exitProcess(0)
+                var intent = Intent(this, webView_BMI::class.java)
+                startActivity(intent)
             }
         }
         return super.onOptionsItemSelected(item)
