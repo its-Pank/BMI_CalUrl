@@ -26,6 +26,10 @@
 
     </item>
 
+    <item android:id="@+id/item_6"
+        android:title="Rating US">
+
+    </item>
 
 
 </menu>

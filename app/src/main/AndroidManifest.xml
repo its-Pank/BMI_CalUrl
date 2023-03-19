@@ -15,6 +15,9 @@
         android:theme="@style/Theme.BMI_Cal"
         tools:targetApi="31">
         <activity
+            android:name=".custome_dialog"
+            android:exported="false" />
+        <activity
             android:name=".webView_BMI"
             android:exported="false" />
         <activity

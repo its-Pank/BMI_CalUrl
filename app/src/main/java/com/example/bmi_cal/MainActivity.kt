@@ -1,13 +1,18 @@
 package com.example.bmi_cal
 
+import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.databinding.DataBindingUtil
+import com.example.bmi_cal.databinding.ActivityCustomeDialogBinding
 import com.example.bmi_cal.databinding.ActivityMainBinding
+import com.example.bmi_cal.databinding.RatingusBinding
 import kotlin.math.pow
 import kotlin.system.exitProcess
 
@@ -17,28 +22,64 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+
+        //binding = ActivityMainBinding.inflate(layoutInflater)
+        //setContentView(binding.root)
+
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
+
 
         binding.btnId.setOnClickListener {
+
 
             if (binding.weightId.editText!!.text.toString().isEmpty() && binding.heightId.editText!!.text.toString().isEmpty())
             {
                 Toast.makeText(this, "Enter Height and Weight", Toast.LENGTH_SHORT).show()
             }else {
                 if (binding.weightId.editText!!.text.toString().isNotEmpty()) {
-                    val weight = binding.weightId.editText!!.text.toString().toFloat()
+                    var weight = binding.weightId.editText!!.text.toString().toFloat()
 
                     if (binding.heightId.editText!!.text.toString().isNotEmpty()) {
-                        val height = binding.heightId.editText!!.text.toString().toFloat()
+                        var height = binding.heightId.editText!!.text.toString().toFloat()
 
                         val bmi = weight / (height / 100).pow(2)
 
-                        val intent = Intent(this, ResultBMI::class.java)
-                        intent.putExtra("bmi", bmi)
-                        intent.putExtra("weight", weight)
-                        intent.putExtra("height", height)
-                        startActivity(intent)
+                        var str : String? =null
+
+                        if (bmi <= 18.5) {
+                           str="You are under weight"
+                        }
+                        if (bmi in 18.5..24.9) {
+                            str="You are Normal"
+                        }
+                        if (bmi in 25.0..29.9) {
+                            str="You are Overweight "
+                        }
+                        if (bmi >= 30) {
+                            str="You are Obesity "
+                        }
+
+                        val customBinding = ActivityCustomeDialogBinding.inflate(layoutInflater)
+                        val dialog = Dialog(this)
+                        dialog.setContentView(customBinding.root)
+
+                        customBinding.weight.setText("Your Weight : " +weight)
+                        customBinding.height.setText("Your Height : $height")
+                        customBinding.bmi.setText("Your BMI : "+String.format("%.2f", bmi))
+                        customBinding.category.setText(str)
+                        dialog.setCancelable(false)
+                        val windowManager = WindowManager.LayoutParams()
+                        windowManager.width = WindowManager.LayoutParams.MATCH_PARENT
+                        windowManager.height = WindowManager.LayoutParams.WRAP_CONTENT
+                        dialog.window?.attributes = windowManager
+                        dialog.show()
+
+                        customBinding.cancel.setOnClickListener{
+                            dialog.dismiss()
+                            binding.weightId.editText!!.text.clear()
+                            binding.heightId.editText!!.text.clear()
+                            binding.weightId.requestFocus()
+                        }
 
                     } else {
                         Toast.makeText(this, "Please enter height", Toast.LENGTH_SHORT).show()
@@ -51,7 +92,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean
     {
         menuInflater.inflate(R.menu.menu,menu)
@@ -85,6 +125,27 @@ class MainActivity : AppCompatActivity() {
             R.id.item_5-> {
                 var intent = Intent(this, webView_BMI::class.java)
                 startActivity(intent)
+            }
+
+            R.id.item_6-> {
+
+                val rating = RatingusBinding.inflate(layoutInflater)
+                val dialog = Dialog(this)
+                dialog.setContentView(rating.root)
+                dialog.setCancelable(false)
+                val windowManager = WindowManager.LayoutParams()
+                windowManager.width = WindowManager.LayoutParams.MATCH_PARENT
+                windowManager.height = WindowManager.LayoutParams.WRAP_CONTENT
+                dialog.window?.attributes = windowManager
+                dialog.show()
+
+
+
+                rating.button.setOnClickListener {
+
+                    dialog.dismiss()
+                }
+
             }
         }
         return super.onOptionsItemSelected(item)
