@@ -175,3 +175,5 @@ class MainActivity : AppCompatActivity() {
 
     }
 }
+
+//https://stackoverflow.com/questions/38618885/error-rpc-failed-curl-transfer-closed-with-outstanding-read-data-remaining
